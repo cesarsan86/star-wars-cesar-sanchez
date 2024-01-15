@@ -1,15 +1,15 @@
 import React from "react";
 import Card from "./card.js";
-import Characters from "../component/characters-container.js";
-import Planets from "../component/planets-container.js";
-import Vehicles from "../component/vehicle-container.js";
+import Characters from "../component/charactersContainer.js";
+import Planets from "../component/planetsContainer.js";
+import Vehicles from "../component/vehiclesContainer.js";
 import "../../styles/home.css";
 
 const Home = () => {
 
 	return (
 		<main className="container">
-
+			
 			<section>
 				<h1>Characters</h1>
 				<Characters />
