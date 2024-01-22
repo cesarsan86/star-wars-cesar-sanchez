@@ -2,8 +2,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			favoritos: [],
-
-			elementos: []
+			elementos: [],
+			characters: [],
+			planets: [],
+			vehicles:[]
 		},
 		actions: {
 			addFavoritos: (elemento) => {
@@ -28,7 +30,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return true
 				}
 				return false
-			}
+			},
+			addCharacters () {
+				fetch("https://swapi.tech/api/people")
+			   .then(response => response.json())
+			   .then(data => setStore({ characters: data.results }))
+			   .catch(error => console.log(error));
+		   },
+			addPlanets () {
+				fetch("https://swapi.tech/api/planets")
+			   .then(response => response.json())
+			   .then(data => setStore({ planets: data.results }))
+			   .catch(error => console.log(error));
+		   },
+		   addVehicles () {
+				fetch("https://swapi.tech/api/vehicles")
+				.then(response => response.json())
+				.then(data => setStore({ vehicles: data.results }))
+				.catch(error => console.log(error));
+	   },
+
 		}
 	};
 };

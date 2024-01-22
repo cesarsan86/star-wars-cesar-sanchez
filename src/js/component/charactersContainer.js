@@ -1,36 +1,36 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import Card from "../views/card.js";
 import { Context } from "../store/appContext.js";
 import "../../styles/cardContainer.css";
 
 const Characters = () => {
-
-    const contexto = useContext(Context);
-
-    const [characters, setCharacters] = useState([]);
-
-    
-    function solicitarData () {
-         fetch("https://swapi.tech/api/people")
-        .then(response => response.json())
-        .then(data => setCharacters(data.results))
-        .catch(error => console.log(error));
-    }
-    
+    const { store, actions } = useContext(Context);
 
     useEffect(() => {
-        solicitarData();
-    }, [])
+        // Llama a la acción fetchCharacters solo si no hay personajes cargados
+        if (store.characters.length === 0) {
+            actions.addCharacters();
+        }
+    }, [actions, store.characters]);
 
     return (
         <div className="contenedor-cards">
-            {
-                characters.map((value, index) => (
-                    <Card nombre={value.name} key={index} id={value.uid} type={"characters"} />
+            {store.characters && store.characters.length > 0 ? (
+                store.characters.map((value, index) => (
+                    <Card
+                        nombre={value.name}
+                        key={index}
+                        id={value.uid}
+                        type={"characters"}
+                        addFavoritos={() => actions.addFavoritos(value)}
+                        isFavorito={actions.verificarFavorito(value)}
+                    />
                 ))
-            }
+            ) : (
+                <p>Cargando personajes...</p>
+            )}
         </div>
-    )
-}
+    );
+};
 
 export default Characters;

@@ -28,7 +28,7 @@ const PlanetDescription = () => {
             <div className="container contenedor-descripcion">
                 <img src="https://www.servithermic.cl/images/400X200.gif" className="card-img-top" alt="..."/>
                 <div>
-                    <h2>{propiedades.name}</h2>
+                    <h2 className="text-warning">{propiedades.name}</h2>
                     <p>{descripcion}</p>
                 </div>
             </div>
