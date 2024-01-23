@@ -48,7 +48,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.then(response => response.json())
 				.then(data => setStore({ vehicles: data.results }))
 				.catch(error => console.log(error));
-	   },
+	   		},
+			
 
 		}
 	};

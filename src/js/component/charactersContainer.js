@@ -7,7 +7,7 @@ const Characters = () => {
     const { store, actions } = useContext(Context);
 
     useEffect(() => {
-        // Llama a la acción fetchCharacters solo si no hay personajes cargados
+       
         if (store.characters.length === 0) {
             actions.addCharacters();
         }
