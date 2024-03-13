@@ -1,58 +1,51 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
-		store: {
-			favoritos: [],
-			elementos: [],
-			characters: [],
-			planets: [],
-			vehicles:[]
+	  store: {},
+	  actions: {
+		// Use getActions to call a function within a fuction
+		getList: async (element, page = 1, limit = 12) => {
+		  try {
+			let response = await fetch(`https://www.swapi.tech/api/${element}?page=${page}&limit=${limit}`);
+			if (!response.ok) {
+			  console.error(`Error en la petición: ${response.statusText}`);
+			  return null;
+			} else {
+			  let data = await response.json();
+			  let newStore = {};
+			  newStore[element] = data.result || data.results;
+			  // Agregar imágenes a la data en base al tipo de elemento y el id
+			  newStore[element] = newStore[element].map((item) => {
+				item.img = `https://starwars-visualguide.com/assets/img/${element === "people" ? "characters" : element}/${item.uid}.jpg`;
+				return item;
+			  });
+			  setStore(newStore);
+			  return { pages: data.total_pages };
+			}
+		  } catch (error) {
+			console.error(`Error en la petición: ${error}`);
+			return null;
+		  }
 		},
-		actions: {
-			addFavoritos: (elemento) => {
-				const store = getStore();
-				if (store.favoritos.includes(elemento)) {
-					alert("Ya has agregado este elemento a favoritos");
-					return
-				}
-				const updatedFavoritos = [...store.favoritos, elemento];
-				setStore({ favoritos: updatedFavoritos });
-			},
-
-			deleteFavoritos: (elemento) => {
-				const store = getStore();
-				const updatedFavoritos = store.favoritos.filter((fav) => fav !== elemento);
-				setStore({ favoritos: updatedFavoritos });
-			},
-
-			verificarFavorito: (elemento) => {
-				const store = getStore();
-				if (store.favoritos.includes(elemento)) {
-					return true
-				}
-				return false
-			},
-			addCharacters () {
-				fetch("https://swapi.tech/api/people")
-			   .then(response => response.json())
-			   .then(data => setStore({ characters: data.results }))
-			   .catch(error => console.log(error));
-		   },
-			addPlanets () {
-				fetch("https://swapi.tech/api/planets")
-			   .then(response => response.json())
-			   .then(data => setStore({ planets: data.results }))
-			   .catch(error => console.log(error));
-		   },
-		   addVehicles () {
-				fetch("https://swapi.tech/api/vehicles")
-				.then(response => response.json())
-				.then(data => setStore({ vehicles: data.results }))
-				.catch(error => console.log(error));
-	   		},
-			
-
-		}
+		
+		// Elements
+		getDetail: async (element, id) => {
+		  try {
+			let response = await fetch(`https://www.swapi.tech/api/${element}/${id}`);
+			if (!response.ok) {
+			  console.error(`Error en la petición: ${response.statusText}`);
+			  return null;
+			} else {
+			  let data = await response.json();
+			  // Retornar solo data.result, ya que se espera un solo elemento
+			  return data.result;
+			}
+		  } catch (error) {
+			console.error(`Error en la petición: ${error}`);
+			return null;
+		  }
+		},
+	  },
 	};
-};
-
-export default getState;
+  };
+  
+  export default getState;

@@ -1,8 +1,113 @@
-h1{
-    color: rgb(202, 9, 9);
-    margin: 20px 0;
+/*
+    home.css: This website contains selectors only used in home.css
+
+    All pages share the styles on index.css but you should create 
+    one more css for each page that will contain the selected used 
+    on that page only (the ones not reused in other pages).
+*/
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+nav i,
+nav a {
+  color: whitesmoke;
+  text-decoration: none;
+  padding-left: 20px;
+}
+nav a:hover {
+  color: #ffa801;
 }
 
-section{
-    margin-bottom: 60px;
+nav i {
+  padding-right: 10px;
 }
+.title-home {
+  color: #ffa801;
+  font-family: "Oswald", sans-serif;
+  text-align: left;
+}
+.page-title {
+  color: #ffa801;
+  font-family: "Oswald", sans-serif;
+  text-align: center;
+  margin: 25px 0;
+}
+.img-logo {
+  width: 80px;
+}
+.planetas-container,
+.peesona-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: scroll;
+  scrollbar-color: rebeccapurple green;
+  padding: 20px;
+}
+.element-card {
+  padding: 4px;
+  background-color: black;
+  margin: 20px 0;
+  border-radius: 6px;
+}
+.card {
+  min-width: 240px;
+  min-height: 200px;
+  background-color: #ecf0f1;
+  font-family: "Oswald", sans-serif;
+}
+.card-img-top {
+  border-radius: 2px;
+}
+.card-detail {
+  display: grid;
+  place-items: center;
+  padding: 50px 0;
+}
+.card-title-section {
+  text-align: center;
+  padding: 8px 0;
+  color:#ecf0f1;
+  font-family: "Oswald", sans-serif;
+}
+.card-home:hover {
+  background-color: #b2bec3;
+  cursor: pointer;
+}
+.card-btn:hover {
+  background-color: #e67e22;
+  border: none;
+}
+.card-ft {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+.list-element {
+  padding-left: 0;
+}
+.list-element li {
+  list-style: none;
+  padding: 4px 8px;
+}
+.list-element li:nth-child(even) {
+  color: #2f3640;
+  background-color: #f1c40f;
+}
+.list-element li:nth-child(odd) {
+  color: white;
+  background-color: #2f3640;
+}
+
+.footer {
+  color: #ffa801;
+}
+.footer a {
+  text-decoration: none;
+  color: white;
+}
+

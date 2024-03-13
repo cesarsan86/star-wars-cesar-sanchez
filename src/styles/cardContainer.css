@@ -1,6 +1,0 @@
-.contenedor-cards{
-  display: grid;
-  grid-auto-flow: column;
-  overflow-x: auto;
-  gap: 25px;
-}
